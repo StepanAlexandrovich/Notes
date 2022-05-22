@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Notes</string>
+
     <string name="add_note">add note</string>
+    <string name="head_line">write headline</string>
+    <string name="description">description</string>
+    <string name="body">body</string>
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
 </resources>

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 public class NotesFragment extends Fragment {
     MainActivity mainActivity = MainActivity.mainActivity;
-
     Notes notes = mainActivity.notes;
     Note note = mainActivity.note;
 
@@ -37,13 +36,13 @@ public class NotesFragment extends Fragment {
             noteVisible.information.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // ......................
+                    mainActivity.openNote(index);
                 }
             });
             noteVisible.buttonDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // ...........................
+                    mainActivity.removeNote(index);
                 }
             });
 
@@ -56,8 +55,7 @@ public class NotesFragment extends Fragment {
         view.findViewById(R.id.buttonAddNote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // ................
+                mainActivity.addNote();
             }
         });
     }
