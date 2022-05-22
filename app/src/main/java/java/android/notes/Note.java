@@ -2,7 +2,7 @@ package java.android.notes;
 
 public class Note {
     private String date;
-    private String headline = "",description = "",keeping = "";
+    private String headline = "",description = "",body = "";
 
     public boolean ready(){
         if(headline.equals("")){ return false; }
@@ -16,7 +16,7 @@ public class Note {
         return headline;
     }
     public String getDescription() { return description; }
-    public String getKeeping() { return keeping; }
+    public String getBody() { return body; }
 
     // set //
     public void setDate(String date) {
@@ -29,7 +29,6 @@ public class Note {
     public void setDescription(String description) {
         this.description = description;
     }
-    public void setKeeping(String keeping) {
-        this.keeping = keeping;
-    }
+    public void setBody(String body) { this.body = body; }
+
 }
