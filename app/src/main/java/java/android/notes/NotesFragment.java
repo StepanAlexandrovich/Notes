@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class NotesFragment extends Fragment {
+public class NotesFragment extends Fragment implements View.OnClickListener{
     MainActivity mainActivity = MainActivity.mainActivity;
     Notes notes = mainActivity.notes;
     Note note = mainActivity.note;
@@ -46,19 +46,26 @@ public class NotesFragment extends Fragment {
                 }
             });
 
-            noteVisible.textViewDate.setText(Time.getDate().toString());
+            noteVisible.textViewDate.setText(notes.getNote(index).getDate());
 
             ((LinearLayout)view).addView(noteVisible);
 
         }
 
-        view.findViewById(R.id.buttonAddNote).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainActivity.addNote();
-            }
-        });
+        view.findViewById(R.id.buttonAddNote).setOnClickListener(this);
+        view.findViewById(R.id.buttonEditText).setOnClickListener(this);
     }
 
-
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.buttonAddNote:
+                mainActivity.addNote();
+                break;
+            case R.id.buttonEditText:
+                CalendarFragment calendarFragment = new CalendarFragment();
+                mainActivity.createFragmentWithBackStack(R.id.fragment_container_list,calendarFragment);
+                break;
+        }
+    }
 }

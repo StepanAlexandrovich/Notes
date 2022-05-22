@@ -50,9 +50,11 @@ public class MainActivity extends AppCompatActivity implements Constants{
 
     void createNoteFragment (){
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            createFragmentWithBackStack(R.id.fragment_container_list,new NoteFragment());
+            //createFragmentWithBackStack(R.id.fragment_container_list,new NoteFragment());
+            createFragment(R.id.fragment_container_list,new NoteFragment());
         }else{
-            createFragmentWithBackStack(R.id.fragment_container_note,new NoteFragment());
+            //createFragmentWithBackStack(R.id.fragment_container_note,new NoteFragment());
+            createFragment(R.id.fragment_container_note,new NoteFragment());
         }
     }
 
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements Constants{
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(fragment_container,fragment)
-                //.addToBackStack(null)
+                .addToBackStack(null)
                 .commit();
     }
 

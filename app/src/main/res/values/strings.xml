@@ -7,4 +7,7 @@
     <string name="body">body</string>
     <string name="save">save</string>
     <string name="cancel">cancel</string>
+    <string name="edit_time">edit time</string>
+    <string name="edit_date">edit date</string>
+
 </resources>

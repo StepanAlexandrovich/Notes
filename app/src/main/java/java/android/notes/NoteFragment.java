@@ -51,9 +51,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener,Const
                 writeNote(note);
 
                 if(note.ready()){
-                    if(mainActivity.mode == Mode.addNote){
-                        notes.addNote(note);
-                    }
+                    if(mainActivity.mode == Mode.addNote){ notes.addNote(note); }
                     mainActivity.createNotesFragment();
                 }else{
                     Toast.makeText(getContext(), "FILL NOTES'NAME", Toast.LENGTH_SHORT).show();
@@ -71,7 +69,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener,Const
         note.setHeadline(editTextHeadLine.getText().toString());
         note.setDescription(editTextDescription.getText().toString());
         note.setBody(editTextBody.getText().toString());
-        note.setDate(Time.getDate().toString());
+        note.setDate(Time.getDateYMD());
     }
 
 }
