@@ -1,8 +1,12 @@
-package java.android.notes;
+package java.android.notes.core;
 
 public class Note {
     private String date;
     private String headline = "",description = "",body = "";
+
+    public Note(String date) {
+        this.date = date;
+    }
 
     public boolean ready(){
         if(headline.equals("")){ return false; }

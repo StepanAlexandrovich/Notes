@@ -1,20 +1,23 @@
-package java.android.notes;
+package java.android.notes.wrapper;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import java.android.notes.R;
+import java.android.notes.core.Control;
+import java.android.notes.core.Notes;
+
 public class NotesFragment extends Fragment implements View.OnClickListener{
-    MainActivity mainActivity = MainActivity.mainActivity;
-    Notes notes = mainActivity.notes;
-    Note note = mainActivity.note;
+    Control control = MainActivity.control;
+    Notes notes = control.notes;
 
     @Nullable
     @Override
@@ -28,6 +31,7 @@ public class NotesFragment extends Fragment implements View.OnClickListener{
 
         for(int i = 0;i<notes.numberOfNotes();i++){
 
+            view.findViewById(R.id.note);
             NoteVisible noteVisible = new NoteVisible(getContext());
 
             noteVisible.textViewNote.setText(String.valueOf(notes.getNote(i).getHeadline()));
@@ -36,13 +40,19 @@ public class NotesFragment extends Fragment implements View.OnClickListener{
             noteVisible.information.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mainActivity.openNote(index);
+                    control.openNoteOutList(index);
+
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                    CreateFragment.createNoteFragment((AppCompatActivity) requireActivity());
                 }
             });
             noteVisible.buttonDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mainActivity.removeNote(index);
+                    control.removeNoteOutList(index);
+
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                    CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 }
             });
 
@@ -60,12 +70,13 @@ public class NotesFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.buttonAddNote:
-                mainActivity.addNote();
+                control.createNote();
+                CreateFragment.createNoteFragment((AppCompatActivity) requireActivity());
                 break;
             case R.id.buttonEditText:
-                CalendarFragment calendarFragment = new CalendarFragment();
-                mainActivity.createFragmentWithBackStack(R.id.fragment_container_list,calendarFragment);
+                CreateFragment.createCalendarFragment((AppCompatActivity) requireActivity());
                 break;
         }
     }
+
 }

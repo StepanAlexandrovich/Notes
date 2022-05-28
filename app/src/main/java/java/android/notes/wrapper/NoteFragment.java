@@ -1,21 +1,23 @@
-package java.android.notes;
+package java.android.notes.wrapper;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class NoteFragment extends Fragment implements View.OnClickListener,Constants{
-    MainActivity mainActivity = MainActivity.mainActivity;
-    Notes notes = mainActivity.notes;
-    Note note = mainActivity.note;
+import java.android.notes.R;
+import java.android.notes.core.Control;
+import java.android.notes.core.Note;
+
+public class NoteFragment extends Fragment implements View.OnClickListener{
+    Control control = MainActivity.control;
 
     EditText editTextHeadLine,editTextDescription,editTextBody;
 
@@ -33,43 +35,40 @@ public class NoteFragment extends Fragment implements View.OnClickListener,Const
         editTextDescription = view.findViewById(R.id.editTextDescription);
         editTextBody = view.findViewById(R.id.editTextBody);
 
+        Note note = control.note;
         editTextHeadLine.setText(note.getHeadline());
         editTextDescription.setText(note.getDescription());
         editTextBody.setText(note.getBody());
 
-        Button buttonAdd = view.findViewById(R.id.buttonAdd);
-        buttonAdd.setOnClickListener(this);
-
-        Button buttonCancel = view.findViewById(R.id.buttonCancel);
-        buttonCancel.setOnClickListener(this);
+        view.findViewById(R.id.buttonSave).setOnClickListener(this);
+        view.findViewById(R.id.buttonCancel).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.buttonAdd:
-                writeNote(note);
+            case R.id.buttonSave:
+                boolean save = control.save(
+                        editTextHeadLine.getText().toString(),
+                        editTextDescription.getText().toString(),
+                        editTextBody.getText().toString()
+                );
 
-                if(note.ready()){
-                    if(mainActivity.mode == Mode.addNote){ notes.addNote(note); }
-                    mainActivity.createNotesFragment();
+                if(save){
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                    CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 }else{
                     Toast.makeText(getContext(), "FILL NOTES'NAME", Toast.LENGTH_SHORT).show();
                 }
+
                 break;
 
             case R.id.buttonCancel:
-                mainActivity.createNotesFragment();
+                requireActivity().getSupportFragmentManager().popBackStack();
+                CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 break;
         }
 
-    }
-
-    void writeNote(Note note){
-        note.setHeadline(editTextHeadLine.getText().toString());
-        note.setDescription(editTextDescription.getText().toString());
-        note.setBody(editTextBody.getText().toString());
-        note.setDate(Time.getDateYMD());
     }
 
 }

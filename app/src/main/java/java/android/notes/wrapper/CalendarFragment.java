@@ -1,4 +1,4 @@
-package java.android.notes;
+package java.android.notes.wrapper;
 
 import androidx.fragment.app.Fragment;
 
@@ -9,14 +9,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.Calendar;
+import java.android.notes.R;
+import java.android.notes.Time;
 
 public class CalendarFragment extends Fragment{
 

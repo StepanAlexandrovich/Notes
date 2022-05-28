@@ -1,4 +1,4 @@
-package java.android.notes;
+package java.android.notes.wrapper;
 
 import android.content.Context;
 import android.graphics.Color;

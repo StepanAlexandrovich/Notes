@@ -1,7 +1,6 @@
-package java.android.notes;
+package java.android.notes.core;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Notes {
 
