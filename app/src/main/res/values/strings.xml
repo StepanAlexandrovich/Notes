@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Notes</string>
+
+    <string name="add_note">add note</string>
+    <string name="head_line">write headline</string>
+    <string name="description">description</string>
+    <string name="body">body</string>
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
+    <string name="edit_time">edit time</string>
+    <string name="edit_date">edit date</string>
+    <string name="open_notes">OPEN NOTES</string>
+    <string name="settings">SETTINGS</string>
+    <string name="about">ABOUT</string>
+
 </resources>
