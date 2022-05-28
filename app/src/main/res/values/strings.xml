@@ -9,5 +9,8 @@
     <string name="cancel">cancel</string>
     <string name="edit_time">edit time</string>
     <string name="edit_date">edit date</string>
+    <string name="open_notes">OPEN NOTES</string>
+    <string name="settings">SETTINGS</string>
+    <string name="about">ABOUT</string>
 
 </resources>

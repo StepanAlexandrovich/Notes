@@ -56,6 +56,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener{
 
                 if(save){
                     requireActivity().getSupportFragmentManager().popBackStack();
+                    requireActivity().getSupportFragmentManager().popBackStack();
                     CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 }else{
                     Toast.makeText(getContext(), "FILL NOTES'NAME", Toast.LENGTH_SHORT).show();

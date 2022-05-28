@@ -42,7 +42,6 @@ public class NotesFragment extends Fragment implements View.OnClickListener{
                 public void onClick(View view) {
                     control.openNoteOutList(index);
 
-                    requireActivity().getSupportFragmentManager().popBackStack();
                     CreateFragment.createNoteFragment((AppCompatActivity) requireActivity());
                 }
             });
@@ -51,7 +50,6 @@ public class NotesFragment extends Fragment implements View.OnClickListener{
                 public void onClick(View view) {
                     control.removeNoteOutList(index);
 
-                    requireActivity().getSupportFragmentManager().popBackStack();
                     CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 }
             });
