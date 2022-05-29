@@ -3,6 +3,9 @@ package java.android.notes.wrapper;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,19 +22,30 @@ public class LaunchFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
         return inflater.inflate(R.layout.fragment_launch,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().hide();
         visible();  // временно
 
         view.findViewById(R.id.buttonOpenNotes).setOnClickListener(this);
-        view.findViewById(R.id.buttonSettings).setOnClickListener(this);
-        view.findViewById(R.id.buttonAbout).setOnClickListener(this);
-        view.findViewById(R.id.buttonAddFragment).setOnClickListener(this);
+        view.findViewById(R.id.buttonClose).setOnClickListener(this);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        MenuItem item = menu.findItem(R.id.action_exit);
+        if(item!=null){
+            item.setVisible(false);
+        }
+
     }
 
     @Override
@@ -43,18 +57,8 @@ public class LaunchFragment extends Fragment implements View.OnClickListener{
 
                 CreateFragment.createNotesFragment( (AppCompatActivity)requireActivity() );
                 break;
-            case R.id.buttonSettings:
-                CreateFragment.createSettingsFragment((AppCompatActivity)requireActivity());
-                break;
-            case R.id.buttonAbout:
-                AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
-                builder.setTitle("BOMBACOD").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {}
-                });
-                builder.create().show();
-                break;
-            case R.id.buttonAddFragment:
-                CreateFragment.createChildFragment(LaunchFragment.this);
+            case R.id.buttonClose:
+                requireActivity().finish();
                 break;
         }
     }

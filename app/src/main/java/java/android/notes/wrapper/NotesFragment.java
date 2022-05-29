@@ -2,6 +2,9 @@ package java.android.notes.wrapper;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -14,20 +17,23 @@ import androidx.fragment.app.Fragment;
 import java.android.notes.R;
 import java.android.notes.core.Control;
 import java.android.notes.core.Notes;
+import java.util.List;
 
-public class NotesFragment extends Fragment implements View.OnClickListener{
+public class NotesFragment extends Fragment{
     Control control = MainActivity.control;
     Notes notes = control.notes;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_notes,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().show();
 
         for(int i = 0;i<notes.numberOfNotes();i++){
 
@@ -60,21 +66,34 @@ public class NotesFragment extends Fragment implements View.OnClickListener{
 
         }
 
-        view.findViewById(R.id.buttonAddNote).setOnClickListener(this);
-        view.findViewById(R.id.buttonEditText).setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.buttonAddNote:
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_fragment_notes,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_add_note:
                 control.createNote();
                 CreateFragment.createNoteFragment((AppCompatActivity) requireActivity());
-                break;
-            case R.id.buttonEditText:
-                CreateFragment.createCalendarFragment((AppCompatActivity) requireActivity());
-                break;
+                return true;
+            case R.id.action_sorted_notes:
+                control.sortedNotes();
+                CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
+                return true;
+            case R.id.action_settings:
+                CreateFragment.createSettingsFragment((AppCompatActivity) requireActivity());
+                return true;
+            case R.id.action_about:
+                CreateFragment.createAboutFragment((AppCompatActivity) requireActivity());
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 }

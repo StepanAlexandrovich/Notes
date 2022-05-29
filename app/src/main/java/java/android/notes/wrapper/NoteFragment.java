@@ -2,6 +2,9 @@ package java.android.notes.wrapper;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -24,6 +27,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_note,container,false);
     }
 
@@ -42,6 +46,15 @@ public class NoteFragment extends Fragment implements View.OnClickListener{
 
         view.findViewById(R.id.buttonSave).setOnClickListener(this);
         view.findViewById(R.id.buttonCancel).setOnClickListener(this);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_fragment_note,menu);
+
+        // хочу переделать название
     }
 
     @Override
@@ -66,7 +79,6 @@ public class NoteFragment extends Fragment implements View.OnClickListener{
 
             case R.id.buttonCancel:
                 requireActivity().getSupportFragmentManager().popBackStack();
-                CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 break;
         }
 

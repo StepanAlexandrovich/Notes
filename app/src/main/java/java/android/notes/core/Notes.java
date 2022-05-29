@@ -1,6 +1,8 @@
 package java.android.notes.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Notes {
 
@@ -16,6 +18,15 @@ public class Notes {
 
     public void removeNote(Note note){
         notes.remove(note);
+    }
+
+    public void sorted(){
+        Collections.sort(notes, new Comparator<Note>(){
+            @Override
+            public int compare(Note note1, Note note2) {
+                return note1.getHeadline().compareTo(note2.getHeadline());
+            }
+        });
     }
 
 }

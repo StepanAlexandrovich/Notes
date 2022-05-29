@@ -19,6 +19,10 @@ public class Control {
         mode = Mode.openNote;
     }
 
+    public void sortedNotes(){
+        notes.sorted();
+    }
+
     public void removeNoteOutList(int index) {
         notes.removeNote(notes.getNote(index));
     }

@@ -8,11 +8,6 @@ public class Note {
         this.date = date;
     }
 
-    public boolean ready(){
-        if(headline.equals("")){ return false; }
-        return true;
-    }
-
     // get //
     public String getDate() { return date; }
 
@@ -34,5 +29,11 @@ public class Note {
         this.description = description;
     }
     public void setBody(String body) { this.body = body; }
+
+    // logic //
+    public boolean ready(){
+        if(headline.equals("")){ return false; }
+        return true;
+    }
 
 }

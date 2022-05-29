@@ -8,7 +8,7 @@
         android:id="@+id/buttonEditDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/edit_date" />
+        android:text="@string/change_in_calendar" />
 
     <TextView
         android:id="@+id/textViewDate"
