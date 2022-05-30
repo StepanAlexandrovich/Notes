@@ -12,6 +12,7 @@ public class CreateFragment {
 
     /////////////////////////////////////////////////
     public static void createFragment(AppCompatActivity appCompatActivity, int fragment_container, Fragment fragment){
+        //fragment.requireView()
         appCompatActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(fragment_container,fragment)

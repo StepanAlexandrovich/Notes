@@ -86,12 +86,6 @@ public class NotesFragment extends Fragment{
                 control.sortedNotes();
                 CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 return true;
-            case R.id.action_settings:
-                CreateFragment.createSettingsFragment((AppCompatActivity) requireActivity());
-                return true;
-            case R.id.action_about:
-                CreateFragment.createAboutFragment((AppCompatActivity) requireActivity());
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }

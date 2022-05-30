@@ -23,5 +23,7 @@
     <string name="open_notes">CLICK ME TO START</string>
     <string name="close">CLICK ME TO FINISH</string>
     <string name="send_note">sent note</string>
+    <string name="navigation_drawer_open">NAVIGATION OPEN</string>
+    <string name="navigation_drawer_close">NAVIGATION CLOSE</string>
 
 </resources>
