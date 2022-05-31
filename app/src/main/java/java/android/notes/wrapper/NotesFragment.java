@@ -1,6 +1,8 @@
 package java.android.notes.wrapper;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +26,8 @@ import java.util.List;
 public class NotesFragment extends Fragment{
     Control control = MainActivity.control;
     Notes notes = control.notes;
+
+    TextView textViewNote;
 
     @Nullable
     @Override
@@ -40,6 +46,8 @@ public class NotesFragment extends Fragment{
             view.findViewById(R.id.note);
             NoteVisible noteVisible = new NoteVisible(getContext());
 
+              // textViewNote
+            textViewNote = noteVisible.textViewNote;
             noteVisible.textViewNote.setText(String.valueOf(notes.getNote(i).getHeadline())+" ");  // " " - > убрать
 
             int index = i;
@@ -52,6 +60,8 @@ public class NotesFragment extends Fragment{
                 }
             });
 
+            registerForContextMenu(noteVisible.textViewNote);
+              //
             noteVisible.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -89,6 +99,29 @@ public class NotesFragment extends Fragment{
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        if(v == textViewNote){
+            menu.add(0,1,0,"red");
+            menu.add(0,2,0,"green");
+            menu.add(0,3,0,"blue");
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case 1: textViewNote.setTextColor(Color.rgb(255,0,0)); break;
+            case 2: textViewNote.setTextColor(Color.rgb(0,255,0)); break;
+            case 3: textViewNote.setTextColor(Color.rgb(0,0,255)); break;
+        }
+
+        return super.onContextItemSelected(item);
     }
 
 }
