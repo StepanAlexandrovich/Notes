@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.1275" />
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.30070546737213405" />
+        <entry key="app/src/main/res/layout-land/nav_header_main.xml" value="0.30070546737213405" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.35520833333333335" />
@@ -12,6 +14,7 @@
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.19746376811594202" />
         <entry key="app/src/main/res/layout/fragment_notes.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/note_to_list.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu_fragment.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu_fragment_note.xml" value="0.35520833333333335" />

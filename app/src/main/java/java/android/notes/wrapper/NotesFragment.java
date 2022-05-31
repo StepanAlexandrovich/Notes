@@ -40,7 +40,7 @@ public class NotesFragment extends Fragment{
             view.findViewById(R.id.note);
             NoteVisible noteVisible = new NoteVisible(getContext());
 
-            noteVisible.textViewNote.setText(String.valueOf(notes.getNote(i).getHeadline()));
+            noteVisible.textViewNote.setText(String.valueOf(notes.getNote(i).getHeadline())+" ");  // " " - > убрать
 
             int index = i;
             noteVisible.information.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +51,8 @@ public class NotesFragment extends Fragment{
                     CreateFragment.createNoteFragment((AppCompatActivity) requireActivity());
                 }
             });
-            noteVisible.buttonDel.setOnClickListener(new View.OnClickListener() {
+
+            noteVisible.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     control.removeNoteOutList(index);

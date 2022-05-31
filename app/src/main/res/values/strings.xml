@@ -26,4 +26,8 @@
     <string name="navigation_drawer_open">NAVIGATION OPEN</string>
     <string name="navigation_drawer_close">NAVIGATION CLOSE</string>
 
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
 </resources>
