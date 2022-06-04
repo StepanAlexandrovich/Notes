@@ -7,7 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SympleNotes {
-    public static void showAlertDialog(AppCompatActivity activity,String title,String textPositiv,String textNegativ){
+    public static void showAlertDialog(AppCompatActivity activity,CustomDialogListener listener, String title, String textPositiv, String textNegativ){
 
         new AlertDialog.Builder(activity)
                 .setTitle(title)
@@ -17,17 +17,18 @@ public class SympleNotes {
                 .setPositiveButton(textPositiv, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(activity,"yes", Toast.LENGTH_LONG).show();
+                        listener.onOk();
                     }
                 })
                 .setNegativeButton(textNegativ, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(activity,"not", Toast.LENGTH_LONG).show();
+                        listener.onNo();
                     }
                 })
                 //.setNeutralButton("neutral",null)
                 .show();
     }
+
 
 }

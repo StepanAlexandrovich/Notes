@@ -23,11 +23,13 @@ import java.android.notes.core.Control;
 import java.android.notes.core.Notes;
 import java.util.List;
 
-public class NotesFragment extends Fragment{
+public class NotesFragment extends Fragment implements CustomDialogListener{
     Control control = MainActivity.control;
     Notes notes = control.notes;
 
     TextView textViewNote;
+
+    private int indexChooseNote;
 
     @Nullable
     @Override
@@ -46,7 +48,7 @@ public class NotesFragment extends Fragment{
             view.findViewById(R.id.note);
             NoteVisible noteVisible = new NoteVisible(getContext());
 
-              // textViewNote
+            // textViewNote
             textViewNote = noteVisible.textViewNote;
             noteVisible.textViewNote.setText(String.valueOf(notes.getNote(i).getHeadline())+" ");  // " " - > убрать
 
@@ -54,23 +56,22 @@ public class NotesFragment extends Fragment{
             noteVisible.information.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    control.openNoteOutList(index);
+                    indexChooseNote = index;
+                    control.openNoteOutList(indexChooseNote);
 
                     CreateFragment.createNoteFragment((AppCompatActivity) requireActivity());
                 }
             });
 
             //registerForContextMenu(noteVisible.textViewNote);
-              //
+            //
             noteVisible.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SympleNotes.showAlertDialog((AppCompatActivity) requireActivity(),"УВЕРЕН?","YES","NO");
 
-                    control.removeNoteOutList(index);
+                    SympleNotes.showAlertDialog((AppCompatActivity) requireActivity(),NotesFragment.this,"УВЕРЕН?","100%","НЕЕЕЕТ!");
 
-
-                    CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
+                    indexChooseNote = index;
                 }
             });
 
@@ -105,8 +106,6 @@ public class NotesFragment extends Fragment{
     }
 
 
-
-
     ///// доработать /////////////
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
@@ -128,6 +127,19 @@ public class NotesFragment extends Fragment{
         }
 
         return super.onContextItemSelected(item);
+    }
+
+
+    // удалять или не удалять
+    @Override
+    public void onOk() {
+        control.removeNoteOutList(indexChooseNote);
+        CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
+    }
+
+    @Override
+    public void onNo() {
+        Toast.makeText(requireActivity(), "Действие отменено пользователем", Toast.LENGTH_SHORT).show();
     }
 
 }

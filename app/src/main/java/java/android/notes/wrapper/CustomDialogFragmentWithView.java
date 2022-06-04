@@ -16,17 +16,25 @@ import java.android.notes.R;
 public class CustomDialogFragmentWithView extends DialogFragment {
     public final static String TAG = "CustomDialogFragmentWithViewTag";
 
+    private CustomDialogListener listener;
+
+    public EditText editText;
+
+    public void setListener(CustomDialogListener listener) {
+        this.listener = listener;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View customView = inflater.inflate(R.layout.dialog_custom,null);
 
-        EditText dialogEditText = customView.findViewById(R.id.edit_text_customView);
+        editText = customView.findViewById(R.id.edit_text_customView);
 
         customView.findViewById(R.id.button_custom_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(requireContext(),dialogEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+                listener.onOk();
                 dismiss();
             }
         });
