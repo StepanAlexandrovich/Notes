@@ -56,6 +56,9 @@ public class LaunchFragment extends Fragment implements View.OnClickListener{
                 notVisible(); // временно
 
                 CreateFragment.createNotesFragment( (AppCompatActivity)requireActivity() );
+
+                new CustomDialogFragmentWithView().show(requireActivity().getSupportFragmentManager(),CustomDialogFragmentWithView.TAG);
+
                 break;
             case R.id.buttonClose:
                 requireActivity().finish();

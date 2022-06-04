@@ -60,12 +60,15 @@ public class NotesFragment extends Fragment{
                 }
             });
 
-            registerForContextMenu(noteVisible.textViewNote);
+            //registerForContextMenu(noteVisible.textViewNote);
               //
             noteVisible.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SympleNotes.showAlertDialog((AppCompatActivity) requireActivity(),"УВЕРЕН?","YES","NO");
+
                     control.removeNoteOutList(index);
+
 
                     CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
                 }
@@ -102,6 +105,9 @@ public class NotesFragment extends Fragment{
     }
 
 
+
+
+    ///// доработать /////////////
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);

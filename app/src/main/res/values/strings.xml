@@ -30,4 +30,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <string name="input_12345">input 12345</string>
+    <string name="ok">OK</string>
+
 </resources>
