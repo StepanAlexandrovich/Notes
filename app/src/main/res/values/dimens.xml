@@ -12,5 +12,7 @@
     <dimen name="margin_image_delete">8dp</dimen>
     <dimen name="text_size_head_line_to_list">32sp</dimen>
     <dimen name="text_size_date_to_list">16sp</dimen>
+    <dimen name="radius_card_view">60dp</dimen>
+    <dimen name="margin_card_view">8dp</dimen>
 
 </resources>
