@@ -8,4 +8,9 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fragment_notes_margin">8dp</dimen>
+    <dimen name="size_image_delete">100dp</dimen>
+    <dimen name="margin_image_delete">8dp</dimen>
+    <dimen name="text_size_head_line_to_list">32sp</dimen>
+    <dimen name="text_size_date_to_list">16sp</dimen>
+
 </resources>

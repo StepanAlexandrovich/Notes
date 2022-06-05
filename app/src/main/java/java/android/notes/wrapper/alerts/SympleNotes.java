@@ -1,13 +1,12 @@
-package java.android.notes.wrapper;
+package java.android.notes.wrapper.alerts;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SympleNotes {
-    public static void showAlertDialog(AppCompatActivity activity,CustomDialogListener listener, String title, String textPositiv, String textNegativ){
+    public static void showAlertDialog(AppCompatActivity activity, CustomDialogListener listener, String title, String textPositiv, String textNegativ){
 
         new AlertDialog.Builder(activity)
                 .setTitle(title)

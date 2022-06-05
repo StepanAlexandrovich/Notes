@@ -1,4 +1,4 @@
-package java.android.notes.wrapper;
+package java.android.notes.wrapper.alerts;
 
 public interface CustomDialogListener {
     void onOk();

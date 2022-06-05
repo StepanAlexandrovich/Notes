@@ -5,7 +5,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +14,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.android.notes.R;
 import java.android.notes.core.Control;
-import java.util.List;
+import java.android.notes.wrapper.helpers.CreateFragment;
+import java.android.notes.wrapper.helpers.Helper;
 
 public class MainActivity extends AppCompatActivity{
     public static Control control = new Control();

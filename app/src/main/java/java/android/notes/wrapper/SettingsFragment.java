@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.android.notes.R;
+import java.android.notes.wrapper.helpers.CreateFragment;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener{
 

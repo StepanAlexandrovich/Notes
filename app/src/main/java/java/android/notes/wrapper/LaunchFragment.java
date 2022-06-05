@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.android.notes.R;
+import java.android.notes.wrapper.alerts.CustomDialogFragmentWithView;
+import java.android.notes.wrapper.alerts.CustomDialogListener;
+import java.android.notes.wrapper.helpers.CreateFragment;
 
-public class LaunchFragment extends Fragment implements View.OnClickListener,CustomDialogListener{
+public class LaunchFragment extends Fragment implements View.OnClickListener, CustomDialogListener {
     private CustomDialogFragmentWithView dialog;
 
     @Nullable

@@ -1,12 +1,17 @@
-package java.android.notes.wrapper;
+package java.android.notes.wrapper.helpers;
 
 import android.content.res.Configuration;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.android.notes.R;
+import java.android.notes.wrapper.AboutFragment;
+import java.android.notes.wrapper.CalendarFragment;
+import java.android.notes.wrapper.LaunchFragment;
+import java.android.notes.wrapper.SettingsFragment;
+import java.android.notes.wrapper.notes.NotesFragment;
+import java.android.notes.wrapper.notes.NoteFragment;
 
 public class CreateFragment {
 

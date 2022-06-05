@@ -1,11 +1,9 @@
-package java.android.notes.wrapper;
+package java.android.notes.wrapper.notes;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -19,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import java.android.notes.R;
 import java.android.notes.core.Control;
 import java.android.notes.core.Note;
+import java.android.notes.wrapper.helpers.CreateFragment;
+import java.android.notes.wrapper.MainActivity;
 
 public class NoteFragment extends Fragment implements View.OnClickListener{
     Control control = MainActivity.control;
