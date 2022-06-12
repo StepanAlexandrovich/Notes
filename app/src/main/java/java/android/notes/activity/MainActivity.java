@@ -1,4 +1,4 @@
-package java.android.notes.wrapper;
+package java.android.notes.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -15,10 +14,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.android.notes.R;
 import java.android.notes.core.Control;
 import java.android.notes.wrapper.helpers.CreateFragment;
-import java.android.notes.wrapper.helpers.Helper;
 
-public class MainActivity extends AppCompatActivity{
-    public static Control control = new Control();
+public class MainActivity extends AppCompatActivity implements IDatatSourseHandler{
+    private Control control = new Control();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,29 +24,11 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         CreateFragment.createLaunchFragment(this);
-        Helper.mainActivity = this;
-
-        initDrawer();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_launch,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_exit){
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void initDrawer(){
+    public void initDrawer(){
         DrawerLayout drawer = findViewById(R.id.drawer);
-        Toolbar toolbar = findViewById(androidx.appcompat.R.id.action_bar);
+        Toolbar toolbar = findViewById(R.id.toolbarNotes);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
 
@@ -73,6 +53,11 @@ public class MainActivity extends AppCompatActivity{
                 return false;
             }
         });
+    }
+
+    @Override
+    public Control getControl() {
+        return control;
     }
 
 }

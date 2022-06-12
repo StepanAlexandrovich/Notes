@@ -1,23 +1,20 @@
 package java.android.notes.wrapper.helpers;
 
-import android.content.res.Configuration;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.android.notes.R;
-import java.android.notes.wrapper.AboutFragment;
-import java.android.notes.wrapper.CalendarFragment;
-import java.android.notes.wrapper.LaunchFragment;
-import java.android.notes.wrapper.SettingsFragment;
-import java.android.notes.wrapper.notes.NotesFragment;
-import java.android.notes.wrapper.notes.NoteFragment;
+import java.android.notes.wrapper.fragments.extra.AboutFragment;
+import java.android.notes.wrapper.fragments.extra.CalendarFragment;
+import java.android.notes.wrapper.fragments.extra.LaunchFragment;
+import java.android.notes.wrapper.fragments.extra.SettingsFragment;
+import java.android.notes.wrapper.fragments.core.NotesFragment;
+import java.android.notes.wrapper.fragments.core.NoteFragment;
 
 public class CreateFragment {
 
     /////////////////////////////////////////////////
     public static void createFragment(AppCompatActivity appCompatActivity, int fragment_container, Fragment fragment){
-        //fragment.requireView()
         appCompatActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(fragment_container,fragment)
@@ -41,49 +38,37 @@ public class CreateFragment {
     ////////////////////////////////////////////////////
 
     public static void createCalendarFragment(AppCompatActivity activity){
-        if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container,new CalendarFragment());
-        }else{
-            CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container_list,new CalendarFragment());
-        }
+        CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new CalendarFragment());
     }
 
     public static void createLaunchFragment (AppCompatActivity activity){
-        CreateFragment.createFragment(activity, R.id.fragment_container,new LaunchFragment());
+        CreateFragment.createFragment(activity, R.id.fragmentContainer,new LaunchFragment());
     }
 
     public static void createNotesFragment(AppCompatActivity activity){
-        if(Helper.beingNotesFragment()){ activity.getSupportFragmentManager().popBackStack(); }
-
-        if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container,new NotesFragment());
-        }else{
-            CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container_list,new NotesFragment());
-        }
+        CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new NotesFragment());
     }
 
     public static void createNoteFragment (AppCompatActivity activity){
-        if(Helper.beingNoteFragment()){ activity.getSupportFragmentManager().popBackStack(); }
-
-        if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container,new NoteFragment());
-        }else{
-            CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container_note,new NoteFragment());
-        }
-
+        CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new NoteFragment());
     }
 
+    public static void createNoteFragmentLand (AppCompatActivity activity){
+        if(Extra.beingNoteFragment(activity)){ activity.getSupportFragmentManager().popBackStack(); }
+        CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainerNote,new NoteFragment());
+    }
+
+    // childFragment
+    //public static void createNoteFragment (androidx.fragment.app.Fragment fragmentParent){
+        //CreateFragment.createChildFragmentWithBackStack(fragmentParent, R.id.fragmentContainerNote,new NoteFragment());
+    //}
+
     public static void createSettingsFragment (AppCompatActivity activity){
-        CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container,new SettingsFragment());
+        CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new SettingsFragment());
     }
 
     public static void createAboutFragment (AppCompatActivity activity){
-        if(Helper.beingAboutFragment()){ activity.getSupportFragmentManager().popBackStack(); }
-        CreateFragment.createFragmentWithBackStack(activity, R.id.fragment_container,new AboutFragment());
-    }
-
-    public static void createChildFragment (androidx.fragment.app.Fragment fragmentParent){
-        //CreateFragment.createChildFragment(fragmentParent, R.id.fragment_child_container,new ChildFragment());
+        CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new AboutFragment());
     }
 
 }

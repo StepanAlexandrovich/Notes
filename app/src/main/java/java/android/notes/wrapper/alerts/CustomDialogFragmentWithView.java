@@ -29,9 +29,9 @@ public class CustomDialogFragmentWithView extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View customView = inflater.inflate(R.layout.dialog_custom,null);
 
-        editText = customView.findViewById(R.id.edit_text_customView);
+        editText = customView.findViewById(R.id.editTextCustomView);
 
-        customView.findViewById(R.id.button_custom_view).setOnClickListener(new View.OnClickListener() {
+        customView.findViewById(R.id.buttonCustomView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onOk();

@@ -1,4 +1,4 @@
-package java.android.notes.wrapper;
+package java.android.notes.wrapper.fragments.extra;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

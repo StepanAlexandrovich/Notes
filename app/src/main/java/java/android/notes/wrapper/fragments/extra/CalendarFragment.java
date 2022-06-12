@@ -1,4 +1,4 @@
-package java.android.notes.wrapper;
+package java.android.notes.wrapper.fragments.extra;
 
 import androidx.fragment.app.Fragment;
 

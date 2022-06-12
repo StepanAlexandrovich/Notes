@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SympleNotes {
+public class SympleNotifications {
     public static void showAlertDialog(AppCompatActivity activity, CustomDialogListener listener, String title, String textPositiv, String textNegativ){
 
         new AlertDialog.Builder(activity)

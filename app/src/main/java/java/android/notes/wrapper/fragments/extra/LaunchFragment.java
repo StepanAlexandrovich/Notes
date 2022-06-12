@@ -1,10 +1,7 @@
-package java.android.notes.wrapper;
+package java.android.notes.wrapper.fragments.extra;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -33,22 +30,9 @@ public class LaunchFragment extends Fragment implements View.OnClickListener, Cu
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((AppCompatActivity) requireActivity()).getSupportActionBar().hide();
-        //visible();  // временно
 
         view.findViewById(R.id.buttonOpenNotes).setOnClickListener(this);
         view.findViewById(R.id.buttonClose).setOnClickListener(this);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        MenuItem item = menu.findItem(R.id.action_exit);
-        if(item!=null){
-            item.setVisible(false);
-        }
-
     }
 
     @Override
@@ -56,11 +40,12 @@ public class LaunchFragment extends Fragment implements View.OnClickListener, Cu
         switch (view.getId()){
             case R.id.buttonOpenNotes:
 
-                //notVisible(); // временно
+                //dialog = new CustomDialogFragmentWithView();
+                //dialog.setListener(this);
+                //dialog.show(requireActivity().getSupportFragmentManager(),CustomDialogFragmentWithView.TAG);
 
-                dialog = new CustomDialogFragmentWithView();
-                dialog.setListener(this);
-                dialog.show(requireActivity().getSupportFragmentManager(),CustomDialogFragmentWithView.TAG);
+                // временно
+                CreateFragment.createNotesFragment( (AppCompatActivity)requireActivity() );
 
                 break;
             case R.id.buttonClose:
@@ -70,13 +55,6 @@ public class LaunchFragment extends Fragment implements View.OnClickListener, Cu
     }
 
     ////////////////////////
-    public void visible(){
-        requireActivity().getSupportFragmentManager().beginTransaction().show(this).commit();
-    }
-
-    public void notVisible(){
-        requireActivity().getSupportFragmentManager().beginTransaction().hide(this).commit();
-    }
 
     @Override
     public void onOk() {

@@ -1,20 +1,24 @@
-package java.android.notes.wrapper.notes;
+package java.android.notes.wrapper.fragments.core;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.android.notes.R;
-import java.android.notes.core.Notes;
-import java.android.notes.wrapper.MainActivity;
+import java.android.notes.core.Note;
+import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder>{
-    Notes notes = MainActivity.control.notes;
-
     private NotesClickListener listener;
+    private List<Note> list;
+
+    public void setList(List<Note> list) {
+        this.list = list;
+    }
 
     public void setListener(NotesClickListener listener) {
         this.listener = listener;
@@ -30,15 +34,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        holder.getItemView().<TextView>findViewById(R.id.headLineToList).setText(notes.getNote(position).getHeadline());
-        holder.getItemView().<TextView>findViewById(R.id.dateToList).setText(notes.getNote(position).getDate());
+        holder.getItemView().<TextView>findViewById(R.id.headLineToList).setText(list.get(position).getHeadline());
+        holder.getItemView().<TextView>findViewById(R.id.dateToList).setText(list.get(position).getDate());
     }
 
     @Override
     public int getItemCount() {
-        return notes.numberOfNotes();
+        return list.size();
     }
 
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private View itemView;
 
@@ -57,11 +64,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
             itemView.findViewById(R.id.imageViewDelete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onDeleteClick(getAdapterPosition());
+                    listener.onDeleteClick(getAdapterPosition(),(ImageView)view);
                 }
             });
 
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public View getItemView() {
             return itemView;

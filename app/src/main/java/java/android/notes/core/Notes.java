@@ -3,10 +3,13 @@ package java.android.notes.core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Notes {
 
     private ArrayList<Note> notes = new ArrayList<>();
+
+    public ArrayList<Note> getNotes() { return notes; }
 
     public int numberOfNotes(){ return notes.size(); }
 
