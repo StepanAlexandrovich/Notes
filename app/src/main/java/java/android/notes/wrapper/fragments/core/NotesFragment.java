@@ -1,6 +1,8 @@
 package java.android.notes.wrapper.fragments.core;
 
+import android.app.Activity;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,10 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -115,6 +120,31 @@ public class NotesFragment extends Fragment{
             public void removeNote(int index) {
                 control.removeNoteOutList(index);
                 adapter.notifyItemRemoved(index);
+            }
+
+            @Override
+            public void onLongItemClick(View view) {
+                Activity activity = requireActivity();
+                PopupMenu popupMenu = new PopupMenu(activity,view);
+                activity.getMenuInflater().inflate(R.menu.menu_notes_context,popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()){
+                            case R.id.headLineRed:
+                                ((TextView)view.findViewById(R.id.headLineToList)).setTextColor(Color.RED);
+                                return true;
+                            case R.id.headLineBlue:
+                                ((TextView)view.findViewById(R.id.headLineToList)).setTextColor(Color.BLUE);
+                                return true;
+                            case R.id.headLineDeepBlue:
+                                ((TextView)view.findViewById(R.id.headLineToList)).setTextColor(ContextCompat.getColor(getContext(),R.color.deep_blue));
+                                return true;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
             }
         });
 

@@ -33,4 +33,9 @@
     <string name="input_12345">input 12345</string>
     <string name="ok">OK</string>
 
+    <string name="head_line_red">red</string>
+    <string name="head_line_green">green</string>
+    <string name="head_line_blue">blue</string>
+    <string name="head_line_deep_blue">deep_blue</string>
+
 </resources>

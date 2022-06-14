@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/menu/menu_fragment_notes.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu_launch.xml" value="0.5552083333333333" />
         <entry key="app/src/main/res/menu/menu_notes.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/menu/menu_notes_context.xml" value="0.35520833333333335" />
       </map>
     </option>
   </component>
