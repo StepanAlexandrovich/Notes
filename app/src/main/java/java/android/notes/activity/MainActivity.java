@@ -1,0 +1,63 @@
+package java.android.notes.activity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.google.android.material.navigation.NavigationView;
+
+import java.android.notes.R;
+import java.android.notes.core.Control;
+import java.android.notes.wrapper.helpers.CreateFragment;
+
+public class MainActivity extends AppCompatActivity implements IDatatSourseHandler{
+    private Control control = new Control();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        CreateFragment.createLaunchFragment(this);
+    }
+
+    public void initDrawer(){
+        DrawerLayout drawer = findViewById(R.id.drawer);
+        Toolbar toolbar = findViewById(R.id.toolbarNotes);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_settings:
+                        CreateFragment.createSettingsFragment(MainActivity.this);
+                        drawer.close();
+                        return true;
+                    case R.id.action_about:
+                        CreateFragment.createAboutFragment(MainActivity.this);
+                        drawer.close();
+                        return true;
+                }
+
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public Control getControl() {
+        return control;
+    }
+
+}
