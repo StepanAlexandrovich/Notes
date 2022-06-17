@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/headLineRed"
+          android:title="@string/head_line_red"
+          android:orderInCategory="10" />
+
+    <item android:id="@+id/headLineBlue"
+        android:title="@string/head_line_blue"
+        android:orderInCategory="20"/>
+
+    <item android:id="@+id/headLineDeepBlue"
+        android:title="@string/head_line_deep_blue"
+        android:orderInCategory="30"/>
+</menu>
