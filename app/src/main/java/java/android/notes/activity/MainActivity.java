@@ -6,22 +6,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.GsonBuilder;
 
 import java.android.notes.R;
 import java.android.notes.core.Control;
+import java.android.notes.wrapper.fragments.core.IPreferences;
 import java.android.notes.wrapper.helpers.CreateFragment;
+import java.util.prefs.Preferences;
 
-public class MainActivity extends AppCompatActivity implements IDatatSourseHandler{
-    private Control control = new Control();
+public class MainActivity extends AppCompatActivity implements IDatatSourseHandler, IPreferences {
+    private Control control;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String stringControl = getStringControl();
+        if(stringControl.equals("default")){
+            control = new Control();
+        }else{
+            control = new GsonBuilder().create().fromJson(stringControl,Control.class);
+        }
 
         CreateFragment.createLaunchFragment(this);
     }
@@ -58,6 +70,20 @@ public class MainActivity extends AppCompatActivity implements IDatatSourseHandl
     @Override
     public Control getControl() {
         return control;
+    }
+
+
+    @Override
+    public String getStringControl() {
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
+        return preferences.getString(PREF_NOTES_KEY,"default");
+    }
+
+    @Override
+    public void putStringControl() {
+        String stringControl = new GsonBuilder().create().toJson(control);
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
+        preferences.edit().putString(PREF_NOTES_KEY,stringControl).apply();
     }
 
 }

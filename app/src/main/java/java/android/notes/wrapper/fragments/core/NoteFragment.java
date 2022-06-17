@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import java.android.notes.R;
 import java.android.notes.activity.IDatatSourseHandler;
+import java.android.notes.activity.MainActivity;
 import java.android.notes.core.Control;
 import java.android.notes.core.Note;
 import java.android.notes.wrapper.helpers.CreateFragment;
@@ -73,6 +74,8 @@ public class NoteFragment extends Fragment implements View.OnClickListener{
                 );
 
                 if(save){
+                    ((IPreferences)requireActivity()).putStringControl();  // save out
+
                     requireActivity().getSupportFragmentManager().popBackStack();
                     requireActivity().getSupportFragmentManager().popBackStack();
                     CreateFragment.createNotesFragment( (AppCompatActivity)requireActivity() );
@@ -87,5 +90,6 @@ public class NoteFragment extends Fragment implements View.OnClickListener{
         }
 
     }
+
 
 }

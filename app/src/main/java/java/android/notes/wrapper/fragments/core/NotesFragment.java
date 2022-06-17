@@ -42,8 +42,6 @@ public class NotesFragment extends Fragment{
 
     private int imageDirectionId = R.drawable.list_down;
 
-    static int test = 0;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,15 +56,6 @@ public class NotesFragment extends Fragment{
         control = ((IDatatSourseHandler)getActivity()).getControl();
         adapter = new NotesAdapter();
 
-        // пока нет базы данных
-        if(test == 0){
-            for(int i = 0;i<20;i++){
-                control.createNote();
-                control.save("заметка "+i,"","");
-            }
-            test = 1;
-        }
-
         Extra.initToolbar((AppCompatActivity)getActivity(),R.id.toolbarNotes);
 
         // переделать и убрать импорт
@@ -77,6 +66,7 @@ public class NotesFragment extends Fragment{
             initButton(view);
         }
 
+       //Toast.makeText(getContext(), getNotes(), Toast.LENGTH_SHORT).show();
     }
 
     private void initList(View view) {
@@ -120,6 +110,7 @@ public class NotesFragment extends Fragment{
             public void removeNote(int index) {
                 control.removeNoteOutList(index);
                 adapter.notifyItemRemoved(index);
+                ((IPreferences)requireActivity()).putStringControl();  // save out
             }
 
             @Override
