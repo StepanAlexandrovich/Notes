@@ -9,31 +9,32 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.GsonBuilder;
 
 import java.android.notes.R;
+import java.android.notes.saveout.WebStore;
 import java.android.notes.core.Control;
-import java.android.notes.wrapper.fragments.core.IPreferences;
+import java.android.notes.saveout.IPreferences;
+import java.android.notes.saveout.IWebStore;
 import java.android.notes.wrapper.helpers.CreateFragment;
-import java.util.prefs.Preferences;
 
-public class MainActivity extends AppCompatActivity implements IDatatSourseHandler, IPreferences {
-    private Control control;
+public class MainActivity extends AppCompatActivity implements IDatatSourseHandler, IPreferences, IWebStore {
+    private Control control = new Control();
+    private WebStore webStore = new WebStore();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String stringControl = getStringControl();
-        if(stringControl.equals("default")){
-            control = new Control();
-        }else{
-            control = new GsonBuilder().create().fromJson(stringControl,Control.class);
-        }
+        //String stringControl = getStringControl();
+        //if(stringControl.equals("default")){
+            //control = new Control();
+        //}else{
+            //control = new GsonBuilder().create().fromJson(stringControl,Control.class);
+        //}
 
         CreateFragment.createLaunchFragment(this);
     }
@@ -84,6 +85,11 @@ public class MainActivity extends AppCompatActivity implements IDatatSourseHandl
         String stringControl = new GsonBuilder().create().toJson(control);
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
         preferences.edit().putString(PREF_NOTES_KEY,stringControl).apply();
+    }
+
+    @Override
+    public WebStore getWebStore() {
+        return webStore;
     }
 
 }

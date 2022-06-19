@@ -10,17 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.android.notes.R;
 import java.android.notes.core.Note;
+import java.android.notes.listeners.INotesClickListener;
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder>{
-    private NotesClickListener listener;
+    private INotesClickListener listener;
     private List<Note> list;
 
     public void setList(List<Note> list) {
         this.list = list;
     }
 
-    public void setListener(NotesClickListener listener) {
+    public void setListener(INotesClickListener listener) {
         this.listener = listener;
     }
 

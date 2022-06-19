@@ -1,9 +1,9 @@
-package java.android.notes.wrapper.fragments.core;
+package java.android.notes.listeners;
 
 import android.view.View;
 import android.widget.ImageView;
 
-public interface NotesClickListener {
+public interface INotesClickListener {
 
     void onOpenClick(int index);
     void onDeleteClick(int index, ImageView view);

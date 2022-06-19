@@ -1,4 +1,4 @@
-package java.android.notes.wrapper.fragments.core;
+package java.android.notes.saveout;
 
 public interface IPreferences {
     String PREFERENCES_NAME = "PREF_NOTES";

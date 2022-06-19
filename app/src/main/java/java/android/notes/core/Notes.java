@@ -23,6 +23,8 @@ public class Notes {
         notes.remove(note);
     }
 
+    public void removeAll(){ notes.clear(); }
+
     public void sorted(){
         Collections.sort(notes, new Comparator<Note>(){
             @Override

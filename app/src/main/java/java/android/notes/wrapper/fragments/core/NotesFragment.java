@@ -1,8 +1,6 @@
 package java.android.notes.wrapper.fragments.core;
 
-import android.app.Activity;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,23 +9,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.android.notes.Helper;
 import java.android.notes.R;
+import java.android.notes.core.Note;
+import java.android.notes.saveout.WebStore;
 import java.android.notes.activity.IDatatSourseHandler;
+import java.android.notes.saveout.IWebStore;
 import java.android.notes.core.Control;
-import java.android.notes.wrapper.animation.TimerControl;
+import java.android.notes.listeners.NotesClickListener;
 import java.android.notes.wrapper.helpers.CreateFragment;
 import java.android.notes.activity.MainActivity;
 import java.android.notes.wrapper.helpers.Extra;
@@ -35,12 +37,15 @@ import java.android.notes.wrapper.helpers.Extra;
 
 public class NotesFragment extends Fragment{
     private Control control;
+    private WebStore webStore;
     private NotesAdapter adapter;
     private RecyclerView rv;
 
     private int animDelay = 500;
 
     private int imageDirectionId = R.drawable.list_down;
+
+    private FirebaseFirestore db;
 
     @Nullable
     @Override
@@ -54,6 +59,8 @@ public class NotesFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         control = ((IDatatSourseHandler)getActivity()).getControl();
+        webStore = ((IWebStore)getActivity()).getWebStore();
+
         adapter = new NotesAdapter();
 
         Extra.initToolbar((AppCompatActivity)getActivity(),R.id.toolbarNotes);
@@ -66,8 +73,11 @@ public class NotesFragment extends Fragment{
             initButton(view);
         }
 
-       //Toast.makeText(getContext(), getNotes(), Toast.LENGTH_SHORT).show();
+        // fireStore
+        control.notes.removeAll();
+        webStore.updateData(control,adapter);
     }
+
 
     private void initList(View view) {
         rv = view.findViewById(R.id.rvNotes);
@@ -91,54 +101,7 @@ public class NotesFragment extends Fragment{
 
         rv.setAdapter(adapter);
 
-        adapter.setListener(new NotesClickListener() {
-            TimerControl timerControl = new TimerControl();
-
-            @Override
-            public void onOpenClick(int index) {
-                control.openNoteOutList(index);
-                createNoteFragent();
-            }
-
-            @Override
-            public void onDeleteClick(int index,ImageView view){
-                //removeNote(index); без анимации
-                timerControl.start(view,index,this);
-            }
-
-            @Override
-            public void removeNote(int index) {
-                control.removeNoteOutList(index);
-                adapter.notifyItemRemoved(index);
-                ((IPreferences)requireActivity()).putStringControl();  // save out
-            }
-
-            @Override
-            public void onLongItemClick(View view) {
-                Activity activity = requireActivity();
-                PopupMenu popupMenu = new PopupMenu(activity,view);
-                activity.getMenuInflater().inflate(R.menu.menu_notes_context,popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()){
-                            case R.id.headLineRed:
-                                ((TextView)view.findViewById(R.id.headLineToList)).setTextColor(Color.RED);
-                                return true;
-                            case R.id.headLineBlue:
-                                ((TextView)view.findViewById(R.id.headLineToList)).setTextColor(Color.BLUE);
-                                return true;
-                            case R.id.headLineDeepBlue:
-                                ((TextView)view.findViewById(R.id.headLineToList)).setTextColor(ContextCompat.getColor(getContext(),R.color.deep_blue));
-                                return true;
-                        }
-                        return true;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
-
+        adapter.setListener(new NotesClickListener(control,(AppCompatActivity)getActivity(),adapter));
     }
 
     private void initButton(View view) {
