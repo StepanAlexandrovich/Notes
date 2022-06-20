@@ -3,7 +3,8 @@ package java.android.notes.listeners;
 import android.view.View;
 import android.widget.ImageView;
 
-public interface INotesClickListener {
+public interface IItemsClickListener {
+
 
     void onOpenClick(int index);
     void onDeleteClick(int index, ImageView view);

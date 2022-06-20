@@ -17,10 +17,9 @@ import java.android.notes.R;
 import java.android.notes.saveout.WebStore;
 import java.android.notes.core.Control;
 import java.android.notes.saveout.IPreferences;
-import java.android.notes.saveout.IWebStore;
 import java.android.notes.wrapper.helpers.CreateFragment;
 
-public class MainActivity extends AppCompatActivity implements IDatatSourseHandler, IPreferences, IWebStore {
+public class MainActivity extends AppCompatActivity implements IDatatSourseHandler, IPreferences{
     private Control control = new Control();
     private WebStore webStore = new WebStore();
 
@@ -29,12 +28,12 @@ public class MainActivity extends AppCompatActivity implements IDatatSourseHandl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //String stringControl = getStringControl();
-        //if(stringControl.equals("default")){
-            //control = new Control();
-        //}else{
-            //control = new GsonBuilder().create().fromJson(stringControl,Control.class);
-        //}
+        String stringControl = getStringControl();
+        if(stringControl.equals("default")){
+            control = new Control();
+        }else{
+            control = new GsonBuilder().create().fromJson(stringControl,Control.class);
+        }
 
         CreateFragment.createLaunchFragment(this);
     }
@@ -73,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements IDatatSourseHandl
         return control;
     }
 
-
     @Override
     public String getStringControl() {
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
@@ -85,11 +83,6 @@ public class MainActivity extends AppCompatActivity implements IDatatSourseHandl
         String stringControl = new GsonBuilder().create().toJson(control);
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
         preferences.edit().putString(PREF_NOTES_KEY,stringControl).apply();
-    }
-
-    @Override
-    public WebStore getWebStore() {
-        return webStore;
     }
 
 }

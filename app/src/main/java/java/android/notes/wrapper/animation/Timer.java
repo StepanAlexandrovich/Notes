@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.android.notes.R;
-import java.android.notes.listeners.INotesClickListener;
+import java.android.notes.listeners.IItemsClickListener;
 
 public class Timer extends CountDownTimer {
     private View view;
-    private INotesClickListener listener;
+    private IItemsClickListener listener;
     private int index;
 
     // drawing
@@ -27,7 +27,7 @@ public class Timer extends CountDownTimer {
     }
 
     // set
-    public void setParams(View view, INotesClickListener listener, int index){
+    public void setParams(View view, IItemsClickListener listener, int index){
         this.view = view;
         this.index = index;
         this.listener = listener;

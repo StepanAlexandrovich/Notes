@@ -3,7 +3,6 @@ package java.android.notes.core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class Notes {
 
@@ -23,13 +22,13 @@ public class Notes {
         notes.remove(note);
     }
 
-    public void removeAll(){ notes.clear(); }
+    //public void removeAll(){ notes.clear(); }
 
     public void sorted(){
         Collections.sort(notes, new Comparator<Note>(){
             @Override
             public int compare(Note note1, Note note2) {
-                return note1.getHeadline().compareTo(note2.getHeadline());
+                return note2.getHeadline().compareTo(note1.getHeadline());
             }
         });
     }

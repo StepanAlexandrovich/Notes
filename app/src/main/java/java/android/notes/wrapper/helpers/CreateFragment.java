@@ -51,7 +51,7 @@ public class CreateFragment {
         CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new NotesFragment());
     }
 
-    public static void createNoteFragment (AppCompatActivity activity){
+    public static void createNoteFragmentPortrait (AppCompatActivity activity){
         CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new NoteFragment());
     }
 
@@ -73,9 +73,9 @@ public class CreateFragment {
         CreateFragment.createFragmentWithBackStack(activity, R.id.fragmentContainer,new AboutFragment());
     }
 
-    public static void createNoteFragent1(AppCompatActivity activity){
+    public static void createNoteFragent(AppCompatActivity activity){
         if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            CreateFragment.createNoteFragment(activity);
+            CreateFragment.createNoteFragmentPortrait(activity);
         }else{
             CreateFragment.createNoteFragmentLand(activity);
         }

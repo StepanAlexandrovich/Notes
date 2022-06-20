@@ -1,6 +1,5 @@
 package java.android.notes.wrapper.fragments.core;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,8 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,32 +17,23 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.android.notes.Helper;
 import java.android.notes.R;
-import java.android.notes.core.Note;
-import java.android.notes.saveout.WebStore;
 import java.android.notes.activity.IDatatSourseHandler;
-import java.android.notes.saveout.IWebStore;
 import java.android.notes.core.Control;
-import java.android.notes.listeners.NotesClickListener;
-import java.android.notes.wrapper.helpers.CreateFragment;
+import java.android.notes.listeners.ButtonsClickListener;
+import java.android.notes.listeners.ItemsClickListener;
+import java.android.notes.listeners.MenuListener;
 import java.android.notes.activity.MainActivity;
 import java.android.notes.wrapper.helpers.Extra;
 
-
 public class NotesFragment extends Fragment{
     private Control control;
-    private WebStore webStore;
     private NotesAdapter adapter;
     private RecyclerView rv;
 
     private int animDelay = 500;
 
     private int imageDirectionId = R.drawable.list_down;
-
-    private FirebaseFirestore db;
 
     @Nullable
     @Override
@@ -59,27 +47,17 @@ public class NotesFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         control = ((IDatatSourseHandler)getActivity()).getControl();
-        webStore = ((IWebStore)getActivity()).getWebStore();
-
-        adapter = new NotesAdapter();
-
-        Extra.initToolbar((AppCompatActivity)getActivity(),R.id.toolbarNotes);
-
-        // переделать и убрать импорт
-        ((MainActivity) requireActivity()).initDrawer();
         initList(view);
+        new ButtonsClickListener((AppCompatActivity)getActivity(),view,control,rv);
 
-        if(requireActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            initButton(view);
-        }
-
-        // fireStore
-        control.notes.removeAll();
-        webStore.updateData(control,adapter);
+        // переделать
+        Extra.initToolbar((AppCompatActivity)getActivity(),R.id.toolbarNotes);
+        // переделать и убрать импорт MainActivity
+        ((MainActivity) requireActivity()).initDrawer();
     }
 
-
     private void initList(View view) {
+        adapter = new NotesAdapter();
         rv = view.findViewById(R.id.rvNotes);
 
         // animation
@@ -91,8 +69,17 @@ public class NotesFragment extends Fragment{
 
         adapter.setList(control.notes.getNotes());
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
+
         llm.setReverseLayout(true);
         llm.setStackFromEnd(true);
+
+        rv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rv.scrollToPosition(control.notes.numberOfNotes() - 1);
+            }
+        },200);
+
         rv.setLayoutManager(llm);
 
         DividerItemDecoration decorator = new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL);
@@ -101,52 +88,18 @@ public class NotesFragment extends Fragment{
 
         rv.setAdapter(adapter);
 
-        adapter.setListener(new NotesClickListener(control,(AppCompatActivity)getActivity(),adapter));
-    }
-
-    private void initButton(View view) {
-        view.findViewById(R.id.imageViewDownUpList).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(imageDirectionId == R.drawable.list_up){
-                    ((ImageView)view).setImageResource((imageDirectionId = R.drawable.list_down));
-                    rv.smoothScrollToPosition(control.notes.numberOfNotes() - 1);
-                }else{
-                    ((ImageView)view).setImageResource((imageDirectionId = R.drawable.list_up));
-                    rv.smoothScrollToPosition(0);
-                }
-            }
-        });
+        adapter.setListener(new ItemsClickListener(control,(AppCompatActivity)getActivity(),adapter));
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
         inflater.inflate(R.menu.menu_fragment_notes,menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_add_note:
-                control.createNote();
-                createNoteFragent();
-                return true;
-            case R.id.action_sorted_notes:
-                control.sortedNotes();
-                CreateFragment.createNotesFragment((AppCompatActivity) requireActivity());
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void createNoteFragent(){
-        if(requireActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            CreateFragment.createNoteFragment((AppCompatActivity) requireActivity());
-        }else{
-            CreateFragment.createNoteFragmentLand((AppCompatActivity) getActivity());
-        }
+        return (new MenuListener((AppCompatActivity)getActivity(),item,control,adapter)).menuSwitch();
     }
 
 }

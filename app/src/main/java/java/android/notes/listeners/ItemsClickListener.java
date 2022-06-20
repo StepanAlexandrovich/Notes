@@ -12,20 +12,19 @@ import androidx.core.content.ContextCompat;
 
 import java.android.notes.R;
 import java.android.notes.core.Control;
-import java.android.notes.saveout.IWebStore;
 import java.android.notes.wrapper.animation.TimerControl;
 import java.android.notes.saveout.IPreferences;
 import java.android.notes.wrapper.fragments.core.NotesAdapter;
 import java.android.notes.wrapper.helpers.CreateFragment;
 
-public class NotesClickListener implements INotesClickListener{
+public class ItemsClickListener implements IItemsClickListener {
     TimerControl timerControl = new TimerControl();
 
     Control control;
     AppCompatActivity activity;
     NotesAdapter adapter;
 
-    public NotesClickListener(Control control, AppCompatActivity activity, NotesAdapter adapter) {
+    public ItemsClickListener(Control control, AppCompatActivity activity, NotesAdapter adapter) {
         this.control = control;
         this.activity = activity;
         this.adapter = adapter;
@@ -34,7 +33,7 @@ public class NotesClickListener implements INotesClickListener{
     @Override
     public void onOpenClick(int index) {
         control.openNoteOutList(index);
-        CreateFragment.createNoteFragent1(activity);
+        CreateFragment.createNoteFragent(activity);
     }
 
     @Override
@@ -42,8 +41,7 @@ public class NotesClickListener implements INotesClickListener{
         //removeNote(index); без анимации
         timerControl.start(view,index,this);
 
-
-        ((IWebStore)activity).getWebStore().del(control.notes.getNote(index));
+        //((IWebStore)activity).getWebStore().del(control.notes.getNote(index));
     }
 
     @Override

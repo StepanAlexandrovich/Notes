@@ -10,18 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.android.notes.R;
 import java.android.notes.core.Note;
-import java.android.notes.listeners.INotesClickListener;
+import java.android.notes.listeners.IItemsClickListener;
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder>{
-    private INotesClickListener listener;
+    private IItemsClickListener listener;
     private List<Note> list;
 
     public void setList(List<Note> list) {
         this.list = list;
     }
-
-    public void setListener(INotesClickListener listener) {
+    public void setListener(IItemsClickListener listener) {
         this.listener = listener;
     }
 
@@ -44,8 +43,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         return list.size();
     }
 
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private View itemView;
@@ -55,20 +52,20 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
             this.itemView = itemView;
 
-            itemView.findViewById(R.id.noteInformation).setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener shortClick = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onOpenClick(getAdapterPosition());
-                }
-            });
 
-            itemView.findViewById(R.id.imageViewDelete).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onDeleteClick(getAdapterPosition(),(ImageView)view);
-                }
-            });
+                    switch (view.getId()){
+                        case R.id.noteInformation: listener.onOpenClick(getAdapterPosition()); break;
+                        case R.id.imageViewDelete: listener.onDeleteClick(getAdapterPosition(),(ImageView)view); break;
+                    }
 
+                }
+            };
+
+            itemView.findViewById(R.id.noteInformation).setOnClickListener(shortClick);
+            itemView.findViewById(R.id.imageViewDelete).setOnClickListener(shortClick);
             itemView.findViewById(R.id.noteInformation).setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
