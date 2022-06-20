@@ -5,6 +5,24 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="red">#E01D0E</color>
+    <color name="green">#04F09D</color>
+    <color name="blue">#0BA2E6</color>
+
+    <color name="cherry">#B8325F</color>
+    <color name="turquoise">#17AFA1</color>
+    <color name="ivory">#fffff0</color>
+    <color name="grey">#808080</color>
+
+    <color name="deep_blue">#020C47</color>
+    <color name="deep_grey">#49423d</color>
+    <color name="deep_green">#053E07</color>
+
+    <color name="pink">#ffc0cb</color>
+    <color name="deep_pink">#e75480</color>
+
 </resources>
