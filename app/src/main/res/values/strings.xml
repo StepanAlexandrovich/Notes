@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">Notes</string>
+
+    <string name="menu_exit">exit</string>
+
+    <string name="add_note">add note</string>
+    <string name="search_note">search note</string>
+    <string name="sorted_notes">sorted</string>
+
+    <string name="edit_date">edit date</string>
+    <string name="menu_about">about</string>
+    <string name="menu_settings">settings</string>
+
+    <string name="head_line">write headline</string>
+    <string name="description">description</string>
+    <string name="body">body</string>
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
+
+    <string name="change_in_calendar">change</string>
+    <string name="dsc_about">приложение разработатно при поддержке канала BombaCod</string>
+
+    <string name="open_notes">CLICK ME TO START</string>
+    <string name="close">CLICK ME TO FINISH</string>
+    <string name="send_note">sent note</string>
+    <string name="navigation_drawer_open">NAVIGATION OPEN</string>
+    <string name="navigation_drawer_close">NAVIGATION CLOSE</string>
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="input_12345">input 12345</string>
+    <string name="ok">OK</string>
+
+    <string name="head_line_red">red</string>
+    <string name="head_line_green">green</string>
+    <string name="head_line_blue">blue</string>
+    <string name="head_line_deep_blue">deep_blue</string>
+
 </resources>
